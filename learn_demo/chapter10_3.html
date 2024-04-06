@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html id="h">
+
+<head>
+    <title>事件捕获与事件冒泡</title>
+</head>
+<div id="a">
+    <div id="b">
+        <button id="c">点我</button>
+    </div>
+</div>
+
+<body>
+    <script>
+        //在js中事件传播分为事件捕获和事件冒泡 
+        //其中事件捕获就是捕获事件，还未触发事件冒泡的执行，事件捕获是从从根元素开始，逐级向下，一直到目标元素传递的
+        //而事件冒泡其实就是事件执行，具体的执行事件，事件冒泡是从目标元素向上传递，传递到它的父元素，一直传到根元素
+        //举个例子，假设我们点击上面的id为c元素 buttton，事件捕获先发生，实际上会先从根html捕获事件，然后到a再到b和c
+        //如果事件捕获阶段没有取消事件传播，则事件最终传播到目标元素，此时目标元素执行事件处理
+        //目标元素执行完事件处理后再逐级向上传播事件，由父元素执行事件处理
+
+        //可以总结为事件传播分为三个阶段：
+        //1. 事件捕获阶段：事件从document对象传播到目标元素的父元素，一直向下直到目标元素本身，这个过程中，可以在父元素上通过事件捕获机制先捕获到事件
+        //2. 目标阶段：事件到达目标元素，会执行目标元素上的事件捕获和事件冒泡
+        //3. 事件冒泡阶段：事件从目标元素开始向上冒泡，通过DOM树传播回document对象
+
+        //相当于事件可以分为事件捕获和事件冒泡两大类，每个元素都可以为这两类注册监听函数
+        //事件开始传播时，会先从根元素到目标元素执行事件捕获注册的函数
+        //执行完成后再从目标元素到根元素执行事件冒泡注册的函数
+        //当然我们也可以在任意一个元素上的事件捕获/事件冒泡函数 上停止事件的传播
+
+
+        //其中addEventListener既可以设置事件捕获，也可以设置事件冒泡，取决于第三个参数
+        //如果第三个参数是true，则为注册了一个事件捕获，如果第三个参数不填或者false 则注册的是一个事件冒泡
+        document.getElementById("a").addEventListener("click", function () {
+            alert("这是元素a上的事件捕获，会第一个触发")
+        }, true);
+        document.getElementById("b").addEventListener("click", function () {
+            alert("这是元素b上的事件冒泡，会最后一个触发")
+        })
+        document.getElementById("c").addEventListener("click", function () {
+            alert("这是元素c上的事件冒泡，会第二个触发")
+        })
+
+        //如果在父元素停止事件传播，则后续流程都会停止
+        document.getElementById("h").addEventListener("click", function (event) {
+            event.stopPropagation()
+        }, true)
+    </script>
+</body>
+
+</html>

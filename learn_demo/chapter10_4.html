@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>form submi事件</title>
+</head>
+
+<body>
+    <div>
+        <form onsubmit="handleFormSubmit(event); return false;">
+            <input type="text" name="myInput" />
+            <input type="submit" value="点我提交">
+        </form>
+    </div>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault()
+            let form = event.target
+            let fromData = new FormData(form)
+            let text = fromData.get("myInput")
+            console.log(text)
+            alert(text)
+        }
+    </script>
+</body>
+
+</html>
