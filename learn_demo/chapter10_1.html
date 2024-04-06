@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>事件处理测试</title>
+</head>
+
+<body>
+    <h2>click example</h2>
+    <button type="button" onclick="clickIt()">点我</button>
+
+    <script type="text/javascript">
+        let count = 1;
+        function clickIt() {
+            alert("you have been click " + count + " times")
+            count++
+        }
+
+        document.addEventListener("click", function () {
+            alert("do not click again")
+        })
+    </script>
+</body>
+
+</html>

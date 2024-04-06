@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>事件委托</title>
+</head>
+
+<body>
+    <div id="buttons">
+        <button class="buttonClass">按钮1</button>
+        <button class="buttonClass">按钮2</button>
+        <button class="buttonClass">按钮3</button>
+        <button class="buttonClass">按钮4</button>
+    </div>
+
+    <script>
+        //下面这一操作在js中叫做事件委派，事件委派指的是你所注册的事件处理器并不是真的注册给目标元素上，而是注册给它们的共同父元素
+        //当你点击一个button的时候，点击事件首先会在按钮上触发，然后事件会冒泡到父元素id为buttons的div元素上，执行div元素注册的click监听器
+        //监听器里我们再通过target.className来过滤是button的元素，为其执行事件
+        //这样的好处是减少内存使用，避免代码冗余
+        document.getElementById("buttons")
+            .addEventListener("click", event => {
+                if (event.target.className = "buttonClass") {
+                    alert("you have been alert button")
+                }
+            })
+    </script>
+</body>
+
+</html>

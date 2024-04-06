@@ -91,3 +91,22 @@ run(asyncGenerator)
 //监听器的内容是：一旦Promise完成，拿到Promise的结果，并将结果赋值给生成器的返回，并触发生成器继续执行代码对应的是.next(result)
 //T2 时刻 Promise完成，此时执行监听器代码，将Promise结果返回，并将结果设置为生成器yield的返回结果 此时const result = yield...被执行
 //然后result的结果就是Promise的结果，，再然后打印result
+
+
+
+
+
+//js中的闭包
+function closures(){
+    let count = 0
+    return function(){
+        return ++count
+    }
+}
+
+let adder = closures()
+console.log("count ",adder())
+console.log("count ",adder())
+console.log("count ",adder())
+console.log("count ",adder())
+
