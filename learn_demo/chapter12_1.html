@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ducoment测试</title>
+</head>
+
+<body>
+    <!-- iframe嵌套 -->
+    <iframe src="https://www.coderzoe.com" width="600" height="400"></iframe>
+
+    <div id="a">
+    </div>
+    <div id="x">
+        <p id="y"></p>
+        <p id="z"></p>
+    </div>
+    <div id="m">
+        <button onclick="handleRedirect()">点击重定向到chapter10_1.html</button>
+    </div>
+    <script>
+        let button = document.createElement("button")
+        button.id = "b"
+        button.textContent = "back"
+        document.getElementById("a").appendChild(button)
+        document.getElementById("b").addEventListener("click", function (event) {
+            //回退到上一个历史浏览记录，类似于点击了浏览器内的 <-
+            console.log("history", window.history)
+            window.history.back()
+        })
+
+        let button2 = document.createElement("button")
+        button2.id = "c"
+        button2.textContent = "forward"
+        document.getElementById("a").appendChild(button2)
+        document.getElementById("c").addEventListener("click", function () {
+            //前进到下一个历史浏览记录，类似于点击了浏览器内的 ->
+            console.log("history", window.history)
+            window.history.forward()
+        })
+        //还可以直接 window.history.go(number) 来决定前进几或者后退几
+
+        //查看操作系统
+        let OS = "Unknown";
+
+        if (navigator.userAgent.indexOf("Win") !== -1) OS = "Windows";
+        if (navigator.userAgent.indexOf("Mac") !== -1) OS = "MacOS";
+        if (navigator.userAgent.indexOf("X11") !== -1) OS = "UNIX";
+        if (navigator.userAgent.indexOf("Linux") !== -1) OS = "Linux";
+        console.log(OS)
+        document.getElementById("y").textContent = OS
+
+        var language = navigator.languages && navigator.languages[0] || // Chrome / Firefox
+            navigator.language ||   // All browsers
+            navigator.userLanguage; // IE <= 10
+
+        console.log(language);
+        document.getElementById("z").textContent = language
+
+        function handleRedirect() {
+            window.location.href = "chapter10_1.html"
+        }
+
+    </script>
+</body>
+
+</html>
